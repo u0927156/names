@@ -43,10 +43,59 @@ fig.update_layout(
 
 # %%
 
-frames = []
-keep_showing = []
-years_to_show = [1930, 1950, 1970, 1990, 2010, 2023]
-for y in [str(y) for y in years_to_show]:
-    curr_series = female_df[y]
+proportions = []
+years_to_show = list(range(1940, 2024))
 
-    filtered_series = curr_series[curr_series != 0]
+
+fig = go.Figure()
+
+for n in [10, 50, 100]:
+    proportions = []
+    for y in [str(y) for y in years_to_show]:
+        curr_series = female_df[y]
+
+        filtered_series = curr_series[curr_series != 0]
+        num_people_with_top_n_names = (
+            filtered_series.sort_values(ascending=False).iloc[:n].sum()
+        )
+        total_names = filtered_series.sum()
+
+        proportion_with_top_n_names = (num_people_with_top_n_names / total_names) * 100
+        proportions.append(proportion_with_top_n_names)
+    fig.add_trace(go.Scatter(x=years_to_show, y=proportions, name=f"Top {n} Names"))
+
+fig.update_layout(
+    title=f"Percent of Girls with Top Names",
+    xaxis_title="Year",
+    yaxis_title="Percent",
+)
+
+# %%
+# Find missing names
+birth_df = pd.read_csv(
+    "/home/spencer_dev/PythonProjects/names/birth_data/NCHS_-_Births_and_General_Fertility_Rates__United_States_20250709.csv"
+)
+birth_df["expected_number_of_boys"] = birth_df["Birth Number"] * 0.505
+birth_df["expected_number_of_girls"] = birth_df["Birth Number"] * 0.495
+birth_df = birth_df[birth_df["Year"] >= 1940]
+
+
+total_recorded_births = female_df[birth_df["Year"].astype(str)].sum()
+
+people_with_missing_names = birth_df["expected_number_of_girls"].reset_index(
+    drop=True
+) - total_recorded_births.reset_index(drop=True)
+
+missing_fig = go.Figure()
+
+missing_fig.add_trace(
+    go.Scatter(
+        x=birth_df["Year"],
+        y=people_with_missing_names,
+    )
+)
+missing_fig.update_layout(
+    title=f"Estimated Number of Girls with Uncommon Names",
+    xaxis_title="Year",
+    yaxis_title="Number of Girls",
+)
