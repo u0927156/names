@@ -1,0 +1,10 @@
+Birth data was originally taken from here:
+https://data.cdc.gov/National-Center-for-Health-Statistics/NCHS-Births-and-General-Fertility-Rates-United-Sta/e6fc-ccez/about_data
+
+I manually entered the numbers from 2019 to 2024 from these sources:
+
+2019: https://www.cdc.gov/nchs/data/nvsr/nvsr70/nvsr70-02-508.pdf
+2020: https://www.cdc.gov/nchs/data/vsrr/vsrr012-508.pdf
+2021-2022: https://www.cdc.gov/nchs/products/databriefs/db477.htm
+2023: https://www.cdc.gov/nchs/products/databriefs/db507.htm
+2024: https://www.cdc.gov/nchs/pressroom/nchs_press_releases/2025/20250423.htm
