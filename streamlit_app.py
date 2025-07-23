@@ -7,7 +7,7 @@ from names.name_utils import convert_number_to_rate, add_sound_columns
 from names.name_by_time import plot_name_popularity_by_time
 
 
-st.write("# Name App+++")
+st.write("# Name Popularity Explorer")
 
 
 pg = st.navigation(
