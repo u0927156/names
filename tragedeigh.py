@@ -60,6 +60,7 @@ fig.add_vline(
 )
 fig.show()
 fig.write_image(output_path / "eigh.png", height=image_height, width=image_width)
+fig.write_image(output_path / "eigh_cover.png", height=1080, width=1920)
 
 
 # %%

@@ -43,4 +43,6 @@ fig = go.Figure()
 
 fig.add_trace(go.Scatter(x=years, y=leigh_counts, name="-leigh"))
 fig.add_trace(go.Scatter(x=years, y=lynn_counts, name="-lynn"))
+
+fig.show()
 # %%

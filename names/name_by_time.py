@@ -75,13 +75,12 @@ def plot_history_of_top_n_names_from_year(df, n, year):
     for name in top_n_names:
         fig.add_trace(go.Scatter(x=x_years, y=df.loc[name][years], name=name))
 
-    print(year)
     fig.add_vline(
         x=int(year),
     )
 
     fig.update_layout(
-        title=f"Popularity of the Top {n} Names from {year} over Time",
+        title=f"Popularity of the Top {n} Name(s) from {year} over Time",
         xaxis=dict(tickmode="linear", tick0=x_years[0], dtick=10),
         xaxis_title="Year",
     )

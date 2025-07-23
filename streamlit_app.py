@@ -7,40 +7,32 @@ from names.name_utils import convert_number_to_rate, add_sound_columns
 from names.name_by_time import plot_name_popularity_by_time
 
 
-name_data_path = Path("./processed_data")
+st.write("# Name App+++")
 
-female_df = pd.read_csv(name_data_path / "female_names.csv", index_col=0)
-male_df = pd.read_csv(name_data_path / "male_names.csv", index_col=0)
-
-female_rate_df = convert_number_to_rate(female_df)
-male_rate_df = convert_number_to_rate(male_df)
-
-male_df = add_sound_columns(male_df)
-female_df = add_sound_columns(female_df)
-female_rate_df = add_sound_columns(female_rate_df)
-male_rate_df = add_sound_columns(male_rate_df)
-
-
-st.write("# Name App++")
-
-selected_gender = st.radio(label="Sex", options=["Male", "Female"])
-use_rate = st.toggle("Use Relative Rate of Names", key="tgl_use_rate")
-
-if selected_gender == "Male":
-    if use_rate:
-        selected_df = male_rate_df
-    else:
-        selected_df = male_df
-else:
-    if use_rate:
-        selected_df = female_rate_df
-    else:
-        selected_df = female_df
-
-st.session_state.use_rate = use_rate
-st.session_state.selected_df = selected_df
 
 pg = st.navigation(
-    [st.Page("pages/name_popularity.py"), st.Page("pages/Top_Names_by_Year.py")]
+    [
+        st.Page("pages/Estimate_Age_By_Name.py"),
+        st.Page(
+            "pages/Name_Popularity.py",
+        ),
+        st.Page("pages/Top_Names_by_Year.py"),
+    ]
 )
 pg.run()
+
+st.markdown(
+    """
+### Credits
+Written by Spencer Peterson
+
+Data: 
+- [CDC Birth Data](https://data.cdc.gov/National-Center-for-Health-Statistics/NCHS-Births-and-General-Fertility-Rates-United-Sta/e6fc-ccez/about_data)
+- [2019](https://www.cdc.gov/nchs/data/nvsr/nvsr70/nvsr70-02-508.pdf)
+- [2020](https://www.cdc.gov/nchs/data/vsrr/vsrr012-508.pdf)
+- [2021-2022](https://www.cdc.gov/nchs/products/databriefs/db477.htm)
+- [2023](https://www.cdc.gov/nchs/products/databriefs/db507.htm)
+- [2024](https://www.cdc.gov/nchs/pressroom/nchs_press_releases/2025/20250423.htm)
+- [Population Pyramid](https://www.census.gov/data-tools/demo/idb/#/dashboard?dashboard_page=country&COUNTRY_YR_ANIM=2025&COUNTRY_YEAR=2025&CCODE=US&menu=countryViz&CCODE_SINGLE=US&subnat_map_admin=ADM1)
+            """
+)

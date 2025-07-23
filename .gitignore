@@ -1,2 +1,4 @@
 /.venv
 *.png
+*.pyc
+/names/__pycache__
